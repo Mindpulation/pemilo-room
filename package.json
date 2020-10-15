@@ -12,5 +12,10 @@
     "express": "^4.17.1",
     "joi": "^17.2.1",
     "mongooo": "^1.1.4"
+  },
+
+  "scripts": {
+    "dev": "node index.js"
   }
+
 }
