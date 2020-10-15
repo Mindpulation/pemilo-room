@@ -6,4 +6,9 @@ const insertAnggota = joi.object().keys({
     nama: joi.string().required(),
 });
 
-module.exports = {insertAnggota}
+const findAnggota = joi.object().keys({
+    find: joi.object().required(),
+    field: joi.object().required(),
+});
+
+module.exports = {insertAnggota, findAnggota}
