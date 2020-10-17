@@ -11,4 +11,14 @@ const findAnggota = joi.object().keys({
     field: joi.object().required(),
 });
 
-module.exports = {insertAnggota, findAnggota}
+const updateStatusAnggota = joi.object().keys({
+    find: joi.object().required(),
+    update: joi.object().required(),
+});
+
+const insertRoom = joi.object().keys({
+    emailAdmin: joi.string().required(),
+    nama: joi.string().required(),
+})
+
+module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom}
