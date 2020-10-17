@@ -7,8 +7,7 @@ const insertAnggota = joi.object().keys({
 });
 
 const findAnggota = joi.object().keys({
-    find: joi.object().required(),
-    field: joi.object().required(),
+    find: joi.object().required()
 });
 
 const updateStatusAnggota = joi.object().keys({
