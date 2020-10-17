@@ -4,7 +4,7 @@ const conn = require('../env/index');
 const { set } = require('mongooo').Update;
 const { save } = require('mongooo').Save;
 const { findOne, find } = require('mongooo').Find;
-const { del } = require('mongooo').Delete;
+const { del, delMany } = require('mongooo').Delete;
 const {generateAnggota, objRoom} = require('./helper');
 
 const mongo = new Mongo;
@@ -20,13 +20,13 @@ let con2;
 const insertAnggota = async (req, res) => {
     const param = generateAnggota(req.body);
     const data = await save(con, param);
-    res.send(data).status(200);
+    res.send({res:data}).status(200);
 }
 
 const findAnggota = async (req, res) => {
     const { find, field } = req.body;
     const data = await findOne(con, find, field);
-    (data === null) ? res.send({message: "Data not found"}) : res.send(data);
+    return (data === null) ? res.send({message: "Data not found"}) : res.send(data);
 }
 
 const updateStatusAnggota = async (req, res) => {
@@ -38,13 +38,13 @@ const updateStatusAnggota = async (req, res) => {
 const insertRoom = async (req, res) => {
     const param = objRoom(req.body);
     const data = save(con2, param);
-    res.send({res:data}).status(200);
+    res.send({res: data}).status(200);
 }
 
 const findAllRoom = async (req, res) => {
   const { param, field, sort } = req.body;
   const data = await find(con2, param, field, sort);
-  (data === null) ? res.send(false) : res.send(data);
+  return (data === null) ? res.send(false) : res.send(data);
 
 // console.log('yey');
 }
@@ -52,7 +52,7 @@ const findAllRoom = async (req, res) => {
 const findRoom = async (req, res) => {
     const {find, field} = req.body;
     const data = await findOne(con2, find, field);
-    res.send({res: data}).status(200);
+    return res.send({res: data}).status(200);
 }
 
 const updateRoom = async (req, res) => {
@@ -68,4 +68,10 @@ const deleteRoom = async (req, res) => {
     
 }
 
-module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom}
+const deleteAllRoom = async (req, res) => {
+    const { param } = req.body;
+    const data = await delMany(con2, param);
+    res.send({res:data}).status(200);
+}
+
+module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom}
