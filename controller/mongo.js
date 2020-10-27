@@ -31,14 +31,20 @@ const findAnggota = async (req, res) => {
 
 const updateStatusAnggota = async (req, res) => {
     const { find, update } = req.body;
+    const cari = await findOne(con, find);
     const data = await set(con, find, update);
-    res.send({res: data}).status(200);
+    
+    if(cari === null){
+        res.send({message: "Data not found"}).status(404);
+    }else{
+        res.send({res: data}).status(200);
+    }
 }
 
 const insertRoom = async (req, res) => {
     const param = objRoom(req.body);
     const data = save(con2, param);
-    res.send({res: data}).status(200);
+    res.send(data).status(200);
 }
 
 const findAllRoom = async (req, res) => {
@@ -46,7 +52,6 @@ const findAllRoom = async (req, res) => {
   const data = await find(con2, param, field, sort);
   return (data === null) ? res.send(false) : res.send(data);
 
-// console.log('yey');
 }
 
 const findRoom = async (req, res) => {
@@ -57,8 +62,15 @@ const findRoom = async (req, res) => {
 
 const updateRoom = async (req, res) => {
     const {find, field} = req.body;
+    const cari = await findOne(con2, find);
     const data = await set(con2, find, field);
-    res.send({res: data}).status(200);
+
+    if(cari === null){
+        return res.send({message: "Data not found"}).status(404);
+    }else{
+        return res.send({res: data}).status(200);
+    }
+   
 }
 
 const deleteRoom = async (req, res) => {
