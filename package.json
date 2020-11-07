@@ -13,9 +13,7 @@
     "joi": "^17.2.1",
     "mongooo": "^1.1.4"
   },
-
   "scripts": {
     "dev": "node index.js"
   }
-
 }
