@@ -4,6 +4,7 @@ const insertAnggota = joi.object().keys({
     codeRoom: joi.string().required(),
     email: joi.string().required().email(),
     nama: joi.string().required(),
+    status : joi.boolean().required()
 });
 
 const findAnggota = joi.object().keys({
