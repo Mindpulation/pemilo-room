@@ -18,6 +18,8 @@ const updateStatusAnggota = joi.object().keys({
 const insertRoom = joi.object().keys({
     emailAdmin: joi.string().required(),
     nama: joi.string().required(),
+    password : joi.string(),
+    deskripsi : joi.string()
 })
 
 module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom}
