@@ -17,6 +17,8 @@ const uuid = () =>  {
 const objRoom = (obj = {}) => {
     const now = new Date();
     obj.codeRoom = generateUniqCode(now, obj.emailAdmin);
+    obj.start = new Date(),
+    obj.status = true
     return obj;
 
 }
