@@ -18,7 +18,7 @@ const updateStatusAnggota = joi.object().keys({
 const insertRoom = joi.object().keys({
     emailAdmin: joi.string().required(),
     nama: joi.string().required(),
-    password : joi.string().required(),
+    password : joi.string().optional(),
     deskripsi : joi.string().required(),
     end: joi.date().required(),
 })
