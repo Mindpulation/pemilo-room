@@ -53,7 +53,7 @@ const insertRoom = async (req, res) => {
     const data = save(con2, param);
     res.send({
         res: data,
-        roomCode: param
+        roomCode: param.codeRoom
     }).status(200);
 }
 
