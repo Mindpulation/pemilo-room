@@ -3,7 +3,7 @@ const app = express.Router();
 
 const { findAllRoom, findRoom } = require('../controller/mongo');
 
-app.get('/findAll', findAllRoom);
-app.get('/find', findRoom);
+app.post('/findAll', findAllRoom);
+app.post('/find', findRoom);
 
 module.exports = app;

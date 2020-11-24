@@ -9,7 +9,7 @@ const uuid = () =>  {
        return v.toString(16);
     });
   }
-  
+
   const generateUniqCode = (now = new Date(), uniq = new String()) => {
     return `${now.getFullYear()}${now.getMonth()}${now.getMilliseconds()}${now.getDate()}(${uniq})${uuid()}`;
 }
@@ -17,6 +17,8 @@ const uuid = () =>  {
 const objRoom = (obj = {}) => {
     const now = new Date();
     obj.codeRoom = generateUniqCode(now, obj.emailAdmin);
+    obj.start = new Date(),
+    obj.status = false
     return obj;
 
 }
