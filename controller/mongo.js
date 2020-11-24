@@ -81,9 +81,16 @@ const updateRoom = async (req, res) => {
 }
 
 const deleteRoom = async (req, res) => {
-    const { param } = req.body;
-    const data = await del(con2, param);
-    res.send({res: data}).status(200);
+    const { param, find } = req.body;
+    const cari = await findOne(con2, find);
+    const data = await del(con2, find, param);
+
+    if(cari === null){
+        return res.send({message: "Data not found"}).status(404);
+    }else{
+        return res.send({res: data}).status(200);
+    }
+    
     
 }
 
