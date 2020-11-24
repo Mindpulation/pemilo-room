@@ -51,7 +51,10 @@ const updateStatusAnggota = async (req, res) => {
 const insertRoom = async (req, res) => {
     const param = objRoom(req.body);
     const data = save(con2, param);
-    res.send(data).status(200);
+    res.send({
+        res: data,
+        roomCode: param
+    }).status(200);
 }
 
 const findAllRoom = async (req, res) => {
