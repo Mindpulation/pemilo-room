@@ -14,9 +14,21 @@ const insertAnggotaMany = joi.array().items(
     })
 );
 
-
 const findAnggota = joi.object().keys({
     find: joi.object().required()
+});
+
+const countAnggota = joi.object().keys({
+    codeRoom : joi.string().required()
+});
+
+const countRoom = joi.object().keys({
+    emailAdmin : joi.string().email().required()
+});
+
+const countRoomStatus = joi.object().keys({
+    emailAdmin : joi.string().email().required(),
+    sta : joi.boolean().required()
 });
 
 const updateStatusAnggota = joi.object().keys({
@@ -31,4 +43,4 @@ const insertRoom = joi.object().keys({
     deskripsi : joi.string().required(),    
 })
 
-module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, insertAnggotaMany}
+module.exports = {countRoom,countRoomStatus,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, insertAnggotaMany, countAnggota}

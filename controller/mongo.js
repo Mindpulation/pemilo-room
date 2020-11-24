@@ -3,7 +3,7 @@ const conn = require('../env/index');
 
 const { set } = require('mongooo').Update;
 const { save, saveMany } = require('mongooo').Save;
-const { findOne, find } = require('mongooo').Find;
+const { findOne, find, getCount } = require('mongooo').Find;
 const { del, delMany } = require('mongooo').Delete;
 const {generateAnggota, objRoom} = require('./helper');
 
@@ -34,6 +34,21 @@ const findAnggota = async (req, res) => {
     const { find, field } = req.body;
     const data = await findOne(con, find, field);
     return (data === null) ? res.send({message: "Data not found"}) : res.send(data);
+}
+
+const countAnggota = async (req, res) => {
+    const ress = await getCount(con, {codeRoom:req.body.codeRoom});    
+    res.send(ress).status(200);
+}
+
+const countRoom = async (req, res) => {
+    const ress =  await getCount(con, {emailAdmin : req.body.emailAdmin});
+    res.send(ress).status(200);
+}
+
+const countRoomWithSta = async (req, res) => {
+    const ress = await getCount(con, {emailAdmin : req.body.emailAdmin, status:req.body.sta});
+    res.send(ress).status(200);
 }
 
 const updateStatusAnggota = async (req, res) => {
@@ -104,4 +119,4 @@ const deleteAllRoom = async (req, res) => {
 }
 
 
-module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
+module.exports = {countAnggota, countRoom, countRoomWithSta,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
