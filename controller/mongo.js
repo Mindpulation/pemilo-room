@@ -2,7 +2,7 @@ const Mongo = require('mongooo').Mongooo;
 const conn = require('../env/index');
 
 const { set } = require('mongooo').Update;
-const { save } = require('mongooo').Save;
+const { save, saveMany } = require('mongooo').Save;
 const { findOne, find } = require('mongooo').Find;
 const { del, delMany } = require('mongooo').Delete;
 const {generateAnggota, objRoom} = require('./helper');
@@ -22,6 +22,13 @@ const insertAnggota = async (req, res) => {
     const data = await save(con, param);
     res.send({res:data}).status(200);
 }
+
+const insertAnggotaMany = async (req, res) => {
+    const param = generateAnggota(req.body);
+    const data = await saveMany(con, param);
+    res.send({res:data}).status(200);
+}
+
 
 const findAnggota = async (req, res) => {
     const { find, field } = req.body;
@@ -86,4 +93,5 @@ const deleteAllRoom = async (req, res) => {
     res.send({res:data}).status(200);
 }
 
-module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom}
+
+module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}

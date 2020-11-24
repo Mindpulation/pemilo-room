@@ -1,7 +1,16 @@
-const {insertAnggota, findAnggota, updateStatusAnggota, insertRoom} = require('./schema');
+const {insertAnggota, insertAnggotaMany, findAnggota, updateStatusAnggota, insertRoom} = require('./schema');
 
 const inRoomAnggotaList = (req, res, next) => {
     const {value, error} = insertAnggota.validate(req.body)
+    if(error === undefined){
+        next();
+    }else{
+        res.send({message: "Oppss, wrong formatting"}).status(304);
+    }
+}
+
+const inRoomAnggotaManyList = (req, res, next) => {
+    const {value, error} = insertAnggotaMany.validate(req.body)
     if(error === undefined){
         next();
     }else{
@@ -37,4 +46,4 @@ const insertRoomList = (req, res, next) => {
 }
 
 
-module.exports = {inRoomAnggotaList, findRoomAnggotaList, updateStatusAnggotaList, insertRoomList}
+module.exports = {inRoomAnggotaList, findRoomAnggotaList, updateStatusAnggotaList, insertRoomList, inRoomAnggotaManyList}

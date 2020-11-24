@@ -6,6 +6,15 @@ const insertAnggota = joi.object().keys({
     nama: joi.string().required()
 });
 
+const insertAnggotaMany = joi.array().items(
+    joi.object().keys({
+        codeRoom: joi.string().required(),
+        email: joi.string().required().email(),
+        nama: joi.string().required()
+    })
+);
+
+
 const findAnggota = joi.object().keys({
     find: joi.object().required()
 });
@@ -22,4 +31,4 @@ const insertRoom = joi.object().keys({
     deskripsi : joi.string().required(),    
 })
 
-module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom}
+module.exports = {insertAnggota, findAnggota, updateStatusAnggota, insertRoom, insertAnggotaMany}
