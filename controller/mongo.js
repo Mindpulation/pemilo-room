@@ -42,12 +42,12 @@ const countAnggota = async (req, res) => {
 }
 
 const countRoom = async (req, res) => {
-    const ress =  await getCount(con, {emailAdmin : req.body.emailAdmin});
+    const ress =  await getCount(con2, {emailAdmin : req.body.emailAdmin});
     res.send(ress).status(200);
 }
 
 const countRoomWithSta = async (req, res) => {
-    const ress = await getCount(con, {emailAdmin : req.body.emailAdmin, status:req.body.sta});
+    const ress = await getCount(con2, {emailAdmin : req.body.emailAdmin, status:req.body.sta});
     res.send(ress).status(200);
 }
 
