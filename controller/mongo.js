@@ -38,19 +38,17 @@ const findAnggota = async (req, res) => {
 
 const countAnggota = async (req, res) => {
     const ress = await getCount(con, {codeRoom:req.body.codeRoom});    
-    res.send(ress);
+    res.send({count:ress});
 }
 
-const countRoom = async (req, res) => {
-    console.log(req.body);
-    const ress =  await getCount(con2, {emailAdmin : req.body.emailAdmin});
-    console.log(ress);
-    res.send(ress);
+const countRoom = async (req, res) => {    
+    const ress =  await getCount(con2, {emailAdmin : req.body.emailAdmin});    
+    res.send({count:ress});
 }
 
 const countRoomWithSta = async (req, res) => {
     const ress = await getCount(con2, {emailAdmin : req.body.emailAdmin, status:req.body.sta});
-    res.send(ress);
+    res.send({count:ress});
 }
 
 const updateStatusAnggota = async (req, res) => {
