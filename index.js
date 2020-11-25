@@ -35,4 +35,6 @@ app.all("*", (req, res) => {
 const server = http.createServer(app);
 server.listen(conn.PORT);
 
+console.log("Ini yang baru coy");
+
 console.log('Server listen on port', conn.PORT);
