@@ -10,6 +10,7 @@ const countListAnggota = (req, res, next) => {
 }
 
 const countListRoom = (req, res, next) => {
+    console.log("Ke Hit NIH");
     const {value, error} = countRoom.validate(req.body)
     if(error === undefined){
         next();
