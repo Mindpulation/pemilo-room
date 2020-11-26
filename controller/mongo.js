@@ -172,6 +172,7 @@ const processExcel = async (req, res) => {
         });
         const data2 = { status:false, codeRoom: req.body.code_room }
         data.map(data => Object.assign(data, data2));
+        console.log("================================\n",data);
         const resultSaveMany = saveMany(con, data)
         res.send({"res" : resultSaveMany});
     });
