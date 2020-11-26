@@ -120,6 +120,7 @@ const deleteAllRoom = async (req, res) => {
 }
 
 const processExcel = async (req, res) => {
+    console.log(req);
         res.send({"res" : "ea"});
 }
 
