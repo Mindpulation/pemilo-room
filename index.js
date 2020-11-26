@@ -23,7 +23,7 @@ app.use(cors());
 app.use('/api/anggota', insertAnggota);
 app.use('/api/anggota', findAnggota);
 app.use('/api/anggota', updateStatusAnggota);
-app.use('api/anggota', insertAnggotaFromExcel)
+app.use('/api/anggota', insertAnggotaFromExcel)
 app.use('/api/room', insertRoom);
 app.use('/api/room', find);
 app.use('/api/room', updateRoom);
