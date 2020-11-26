@@ -4,6 +4,7 @@ const http = require('http');
 
 const conn = require('./env/index');
 const insertAnggota = require('./view/insertAnggota');
+const insertAnggotaFromExcel = require('./view/insertAnggotaFromExcel')
 const findAnggota = require('./view/findAnggota');
 const updateStatusAnggota = require('./view/updateStatusAnggota');
 const insertRoom = require('./view/insertRoom');
@@ -22,6 +23,7 @@ app.use(cors());
 app.use('/api/anggota', insertAnggota);
 app.use('/api/anggota', findAnggota);
 app.use('/api/anggota', updateStatusAnggota);
+app.use('api/anggota', insertAnggotaFromExcel)
 app.use('/api/room', insertRoom);
 app.use('/api/room', find);
 app.use('/api/room', updateRoom);
