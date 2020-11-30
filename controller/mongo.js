@@ -163,7 +163,7 @@ const processExcel = async (req, res) => {
             return item;
         });
         const resultSaveMany = saveMany(con, finalData);
-        res.send({"res" : resultSaveMany, "result" : finalData});
+        res.send({"res" : resultSaveMany});
     });
 }
 
