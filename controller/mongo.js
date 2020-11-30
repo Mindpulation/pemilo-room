@@ -155,6 +155,13 @@ const processExcel = async (req, res) => {
         const data2 = { status:false, codeRoom: req.body.code_room }
         var finalData = [].concat.apply([], hasil);
         finalData.map(data => Object.assign(data, data2));
+        finalData.map( function( item ){
+            for(var key in item){
+                item[ key.toLowerCase() ] = item[key];
+                delete item[key];
+            }
+            return item;
+        });
         const resultSaveMany = saveMany(con, finalData);
         res.send({"res" : resultSaveMany});
     });
