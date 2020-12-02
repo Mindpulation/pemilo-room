@@ -1,7 +1,10 @@
 const Mongo = require('mongooo').Mongooo;
 const conn = require('../env/index');
 const multer = require('multer');
-const excelToJson = require("convert-excel-to-json");
+
+const excelToJson = require('convert-excel-to-json');
+var XLSX = require('xlsx');
+
 
 const { set } = require('mongooo').Update;
 const { save, saveMany } = require('mongooo').Save;
@@ -64,6 +67,47 @@ const updateStatusAnggota = async (req, res) => {
         res.send({res: data}).status(200);
     }
 }
+
+async function uploadAndInsert(req, res){    
+    
+  const file = req.files.excel_file;
+
+  file.mv('./uploads/' + file.name, function(err) {
+      
+    if(err) throw err;
+
+    let workbook = XLSX.readFile('./uploads/' + file.name);
+    let sheet_name_list = workbook.SheetNames;                
+
+    const resjs = excelToJson({
+    sourceFile: './uploads/' + file.name,header:{rows:1},
+    columnToKey: { C:'nama',E:'email' }, 
+    sheets: sheet_name_list });
+
+    let arrAll = [];        
+
+    let leng = sheet_name_list.length;        
+
+    let j = 0;
+    while(j<leng){
+     
+      let tmp = Object.values(resjs)[j];            
+      let len = tmp.length;
+      for(let i=0;i<len;i++){                                
+        tmp[i].codeRoom = req.body.code_room;
+        tmp[i].status = false;
+      }
+      j++;
+      arrAll = arrAll.concat(tmp);
+    }
+
+     const hasil = saveMany(con, arrAll);
+
+     res.send({success:hasil});
+
+  });
+}
+
 
 const insertRoom = async (req, res) => {
     const param = objRoom(req.body);
@@ -180,4 +224,4 @@ const processExcel = async (req, res) => {
 
 }
 
-module.exports = {processExcel,countAnggota, countRoom, countRoomWithSta,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
+module.exports = {uploadAndInsert,processExcel,countAnggota, countRoom, countRoomWithSta,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
