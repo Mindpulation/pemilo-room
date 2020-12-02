@@ -120,7 +120,10 @@ const deleteAllRoom = async (req, res) => {
     res.send({res:data}).status(200);
 }
 
+
+
 const processExcel = async (req, res) => {
+   
     var storage = multer.diskStorage({
         destination: function(req, file, cb) {
             cb(null, '../uploads');
@@ -133,6 +136,8 @@ const processExcel = async (req, res) => {
 
     upload(req, res, (err) => {
         console.log(req.body.code_room)
+        //console.log(req);
+        console.log(req);
 
         if(err) {
             res.status(400).send("Something went wrong!\nmsg : "+ err);
@@ -162,13 +167,17 @@ const processExcel = async (req, res) => {
             }
             return item;
         });
-        const resultSaveMany = saveMany(con, finalData);
+        // const resultSaveMany = await saveMany(con, finalData);
 
         console.log(finalData);
 
-        res.send({"res" : resultSaveMany});
+        // res.send({"res" : resultSaveMany});
         
     });
+
+
+
+
 }
 
 module.exports = {processExcel,countAnggota, countRoom, countRoomWithSta,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
