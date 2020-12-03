@@ -70,6 +70,8 @@ const updateStatusAnggota = async (req, res) => {
 
 async function uploadAndInsert(req, res){    
     
+  console.log(req.body);
+
   const file = req.files.excel_file;
 
   file.mv('./uploads/' + file.name, function(err) {
@@ -145,17 +147,9 @@ const updateRoom = async (req, res) => {
 }
 
 const deleteRoom = async (req, res) => {
-    const { param, find } = req.body;
-    const cari = await findOne(con2, find);
-    const data = await del(con2, find, param);
-
-    if(cari === null){
-        return res.send({message: "Data not found"}).status(404);
-    }else{
-        return res.send({res: data}).status(200);
-    }
-    
-    
+    const { param } = req.body;
+    const data = await del(con2, param);
+    return res.send({res: data}).status(200);
 }
 
 const deleteAllRoom = async (req, res) => {
