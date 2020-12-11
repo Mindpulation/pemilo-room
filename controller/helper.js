@@ -10,6 +10,20 @@ const uuid = () =>  {
     });
   }
 
+function undian(index = 1){
+  const defaultValue = "00000";
+  const ctx = index.toString();
+  return defaultValue.substr(0, defaultValue.length - ctx.length) + ctx;
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+  
+const tiket = (email = "") => {
+  return `${email.charAt(0)}${email.charAt(1)}-${getRandomInt(9)}${getRandomInt(9)}${getRandomInt(9)}${getRandomInt(9)}${getRandomInt(9)}`
+}
+
   const generateUniqCode = (now = new Date(), uniq = new String()) => {
     return `${now.getFullYear()}${now.getMonth()}${now.getMilliseconds()}${now.getDate()}(${uniq})${uuid()}`;
 }
@@ -23,4 +37,4 @@ const objRoom = (obj = {}) => {
 
 }
 
-module.exports = { generateAnggota, generateUniqCode, objRoom, uuid }
+module.exports = { generateAnggota, generateUniqCode, objRoom, uuid, tiket, undian }

@@ -10,7 +10,7 @@ const { set } = require('mongooo').Update;
 const { save, saveMany } = require('mongooo').Save;
 const { findOne, find, getCount } = require('mongooo').Find;
 const { del, delMany } = require('mongooo').Delete;
-const {generateAnggota, objRoom} = require('./helper');
+const {generateAnggota, objRoom, tiket, undian} = require('./helper');
 
 const mongo = new Mongo;
 
@@ -68,11 +68,14 @@ const updateStatusAnggota = async (req, res) => {
     }
 }
 
+
 async function uploadAndInsert(req, res){    
     
-  console.log(req.body);
+  //console.log(req.body);
 
   const file = req.files.excel_file;
+
+  //console.log(req.files);
 
   file.mv('./uploads/' + file.name, function(err) {
       
@@ -82,8 +85,8 @@ async function uploadAndInsert(req, res){
     let sheet_name_list = workbook.SheetNames;                
 
     const resjs = excelToJson({
-    sourceFile: './uploads/' + file.name,header:{rows:1},
-    columnToKey: { C:'nama',E:'email' }, 
+    sourceFile: './uploads/' + file.name,header:{rows:0},
+    columnToKey: {A:'email'}, 
     sheets: sheet_name_list });
 
     let arrAll = [];        
@@ -97,15 +100,19 @@ async function uploadAndInsert(req, res){
       let len = tmp.length;
       for(let i=0;i<len;i++){                                
         tmp[i].codeRoom = req.body.code_room;
+        tmp[i].codeTicket = tiket(tmp[i].email);
+        tmp[i].undian = undian(i+1);
         tmp[i].status = false;
       }
       j++;
       arrAll = arrAll.concat(tmp);
     }
 
-     const hasil = saveMany(con, arrAll);
+    //console.log(arrAll);
 
-     res.send({success:hasil});
+    const hasil = saveMany(con, arrAll);
+
+     //res.send({success:hasil});
 
   });
 }
