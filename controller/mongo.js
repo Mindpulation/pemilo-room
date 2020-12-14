@@ -118,7 +118,7 @@ async function uploadAndInsert(req, res){
 
     const hasil = saveMany(con, arrAll);
 
-     //res.send({success:hasil});
+    res.send({success:hasil});
 
   });
 }
