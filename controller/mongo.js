@@ -34,6 +34,12 @@ const insertAnggotaMany = async (req, res) => {
     res.send({res:data}).status(200);
 }
 
+const findManyAnggota = async (req, res) => {
+    const {find} = req.body;
+    const data = await find(con, find);
+    return (data === null) ? res.send({message: "Data not found"}) : res.send(data);
+}
+
 
 const findAnggota = async (req, res) => {
     const { find, field } = req.body;
@@ -225,4 +231,4 @@ const processExcel = async (req, res) => {
 
 }
 
-module.exports = {uploadAndInsert,processExcel,countAnggota, countRoom, countRoomWithSta,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
+module.exports = {findManyAnggota,uploadAndInsert,processExcel,countAnggota, countRoom, countRoomWithSta,insertAnggota, findAnggota, updateStatusAnggota, insertRoom, findAllRoom, findRoom, updateRoom, deleteRoom, deleteAllRoom, insertAnggotaMany}
