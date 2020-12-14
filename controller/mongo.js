@@ -35,8 +35,8 @@ const insertAnggotaMany = async (req, res) => {
 }
 
 const findManyAnggota = async (req, res) => {
-    const {find} = req.body;
-    const data = await find(con, find);
+    const param = req.body;
+    const data = await find(con, param.find);
     return (data === null) ? res.send({message: "Data not found"}) : res.send(data);
 }
 
