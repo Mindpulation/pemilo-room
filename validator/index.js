@@ -1,4 +1,4 @@
-const {countRoom,countRoomStatus ,insertAnggota, insertAnggotaMany, findAnggota, updateStatusAnggota, insertRoom, countAnggota} = require('./schema');
+const {countRoom,countRoomStatus ,insertAnggota, insertAnggotaMany, findAnggota, updateStatusAnggota, insertRoom, countAnggota, findRangeAnggota} = require('./schema');
 
 const countListAnggota = (req, res, next) => {
     const {value, error} = countAnggota.validate(req.body)
@@ -47,7 +47,7 @@ const inRoomAnggotaManyList = (req, res, next) => {
 }
 
 const findRoomAnggotaList = (req, res, next) => {
-    const {value, error} = findAnggota.validate(req.body)
+    const {value, error} = findRangeAnggota.validate(req.body)
     if(error === undefined){
         next();
     }else{

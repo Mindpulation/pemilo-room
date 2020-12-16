@@ -37,9 +37,9 @@ const insertAnggotaMany = async (req, res) => {
 }
 
 const findManyAnggota = async (req, res) => {
-    const param = req.body;
-    const data = await find(con, param.find);
-    return (data === null) ? res.send({message: "Data not found"}) : res.send(data);
+  const { start, count, find } = req.body;
+  const data = await findRange(con2, start, count, find);  
+  return (data === null) ? res.send(false) : res.send(data);
 }
 
 
@@ -136,8 +136,8 @@ const insertRoom = async (req, res) => {
 }
 
 const findAllRoom = async (req, res) => {
-  const { start, count, param } = req.body;
-  const data = await findRange(con2, start, count, param);  
+  const { param } = req.body;
+  const data = await find(con2, param);  
   return (data === null) ? res.send(false) : res.send(data);
 
 }
