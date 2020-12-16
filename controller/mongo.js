@@ -38,7 +38,8 @@ const insertAnggotaMany = async (req, res) => {
 
 const findManyAnggota = async (req, res) => {
   const { start, count, find } = req.body;
-  const data = await findRange(con2, start, count, find);  
+  const data = await findRange(con, start, count, find);  
+  console.log(data);
   return (data === null) ? res.send(false) : res.send(data);
 }
 
