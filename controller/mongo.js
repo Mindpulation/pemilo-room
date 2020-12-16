@@ -5,10 +5,12 @@ const multer = require('multer');
 const excelToJson = require('convert-excel-to-json');
 var XLSX = require('xlsx');
 
+const Mongoo = require('mongooo');
 
 const { set } = require('mongooo').Update;
 const { save, saveMany } = require('mongooo').Save;
-const { findOne, find, getCount } = require('mongooo').Find;
+const { find, findOne, findRange, getCount } = Mongoo.Find;
+//const { findOne, find, getCount } = require('mongooo').Find;
 const { del, delMany } = require('mongooo').Delete;
 const {generateAnggota, objRoom, tiket, undian} = require('./helper');
 
@@ -134,8 +136,8 @@ const insertRoom = async (req, res) => {
 }
 
 const findAllRoom = async (req, res) => {
-  const { param, field, sort } = req.body;
-  const data = await find(con2, param, field, sort);
+  const { start, count, param } = req.body;
+  const data = await findRange(con2, start, count, param);  
   return (data === null) ? res.send(false) : res.send(data);
 
 }
