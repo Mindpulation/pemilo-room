@@ -2,9 +2,9 @@ const express = require('express');
 const app = express.Router();
 
 const { findAnggota, countAnggota, findManyAnggota } = require('../controller/mongo');
-const { findRoomAnggotaList, countListAnggota } = require('../validator/index');
+const { findRoomAnggotaList, countListAnggota, findAnggotas } = require('../validator/index');
 
-app.post('/find', findRoomAnggotaList, findAnggota);
+app.post('/find', findAnggotas, findAnggota);
 app.post('/countAnggota', countListAnggota, countAnggota);
 app.post('/findAll', findRoomAnggotaList, findManyAnggota);
 

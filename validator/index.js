@@ -48,6 +48,7 @@ const inRoomAnggotaManyList = (req, res, next) => {
 
 const findRoomAnggotaList = (req, res, next) => {
     const {value, error} = findRangeAnggota.validate(req.body)
+    console.log(error, "\n", value)
     if(error === undefined){
         next();
     }else{
@@ -73,5 +74,14 @@ const insertRoomList = (req, res, next) => {
     }
 }
 
+const findAnggotas = (req, res, next) => {
+    const {value, error} = findAnggota.validate(req.body)
+    console.log(error, "\n", value)
+    if(error === undefined){
+        next();
+    }else{
+        res.send({message: "Opps, wrong formatting"}).status(304);
+    }
+}
 
-module.exports = {countRoomSta,countListRoom, countListAnggota,inRoomAnggotaList, findRoomAnggotaList, updateStatusAnggotaList, insertRoomList, inRoomAnggotaManyList}
+module.exports = {countRoomSta,countListRoom, countListAnggota,inRoomAnggotaList, findRoomAnggotaList, updateStatusAnggotaList, insertRoomList, inRoomAnggotaManyList, findAnggotas}
